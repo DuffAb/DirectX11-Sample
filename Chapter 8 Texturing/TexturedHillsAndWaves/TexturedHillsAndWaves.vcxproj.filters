@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="FX">
+      <UniqueIdentifier>{c3b96dc9-aaf7-4e1b-8f8c-9e0c667d67e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common_VS2015">
+      <UniqueIdentifier>{b7cfe54f-8727-4928-8a81-45395f38e16d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FX\LightHelper.fx">
+      <Filter>FX</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="FX\Basic.fx">
+      <Filter>FX</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Effects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedHillsAndWavesDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\d3dApp.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\d3dUtil.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\GameTimer.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\GeometryGenerator.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\LightHelper.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\MathHelper.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\Waves.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\dxerr.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common_vs2015\DDSTextureLoader.cpp">
+      <Filter>Common_VS2015</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Effects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\d3dApp.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\d3dUtil.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\d3dx11effect.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\GameTimer.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\GeometryGenerator.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\LightHelper.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\MathHelper.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\Waves.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\dxerr.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common_vs2015\DDSTextureLoader.h">
+      <Filter>Common_VS2015</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
