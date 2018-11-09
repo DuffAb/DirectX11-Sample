@@ -14,12 +14,14 @@
     <ProjectGuid>{876D20E3-51E0-4190-A673-7AAF888C03EA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Mirror</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -39,6 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>../../Common_vs2015;$(IncludePath)</IncludePath>
+    <LibraryPath>../../Common_vs2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -50,11 +54,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../Common_vs2015;$(IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dx11d.lib;D3DCompiler.lib;Effects11d.lib;dxerr.lib;dxgi.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;D3DCompiler.lib;Effects11d.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -88,27 +93,31 @@
     <None Include="FX\LightHelper.fx" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Common\d3dApp.cpp" />
-    <ClCompile Include="..\..\Common\d3dUtil.cpp" />
-    <ClCompile Include="..\..\Common\GameTimer.cpp" />
-    <ClCompile Include="..\..\Common\GeometryGenerator.cpp" />
-    <ClCompile Include="..\..\Common\LightHelper.cpp" />
-    <ClCompile Include="..\..\Common\MathHelper.cpp" />
-    <ClCompile Include="..\..\Common\Waves.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\d3dApp.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\d3dUtil.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\dxerr.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\GameTimer.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\GeometryGenerator.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\LightHelper.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\MathHelper.cpp" />
+    <ClCompile Include="..\..\Common_vs2015\Waves.cpp" />
     <ClCompile Include="Effects.cpp" />
     <ClCompile Include="MirrorDemo.cpp" />
     <ClCompile Include="RenderStates.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Common\d3dApp.h" />
-    <ClInclude Include="..\..\Common\d3dUtil.h" />
-    <ClInclude Include="..\..\Common\d3dx11effect.h" />
-    <ClInclude Include="..\..\Common\GameTimer.h" />
-    <ClInclude Include="..\..\Common\GeometryGenerator.h" />
-    <ClInclude Include="..\..\Common\LightHelper.h" />
-    <ClInclude Include="..\..\Common\MathHelper.h" />
-    <ClInclude Include="..\..\Common\Waves.h" />
+    <ClInclude Include="..\..\Common_vs2015\d3dApp.h" />
+    <ClInclude Include="..\..\Common_vs2015\d3dUtil.h" />
+    <ClInclude Include="..\..\Common_vs2015\d3dx11effect.h" />
+    <ClInclude Include="..\..\Common_vs2015\DDSTextureLoader.h" />
+    <ClInclude Include="..\..\Common_vs2015\dxerr.h" />
+    <ClInclude Include="..\..\Common_vs2015\GameTimer.h" />
+    <ClInclude Include="..\..\Common_vs2015\GeometryGenerator.h" />
+    <ClInclude Include="..\..\Common_vs2015\LightHelper.h" />
+    <ClInclude Include="..\..\Common_vs2015\MathHelper.h" />
+    <ClInclude Include="..\..\Common_vs2015\Waves.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="RenderStates.h" />
     <ClInclude Include="Vertex.h" />

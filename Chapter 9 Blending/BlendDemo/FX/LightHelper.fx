@@ -6,10 +6,10 @@
 
 struct DirectionalLight
 {
-	float4 Ambient;
-	float4 Diffuse;
-	float4 Specular;
-	float3 Direction;
+	float4 Ambient;  // 由光源发射的环境光的数量
+	float4 Diffuse;  // 由光源发射的漫反射光的数量
+	float4 Specular; // 由光源发射的高光的数量
+	float3 Direction;// 灯光方向
 	float pad;
 };
 

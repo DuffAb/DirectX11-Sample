@@ -56,11 +56,11 @@ VertexOut VS(VertexIn vin)
 {
 	VertexOut vout;
 	
-	// Transform to world space space.
+	// Transform to world space space.// 转换到世界空间
 	vout.PosW    = mul(float4(vin.PosL, 1.0f), gWorld).xyz;
 	vout.NormalW = mul(vin.NormalL, (float3x3)gWorldInvTranspose);
 		
-	// Transform to homogeneous clip space.
+	// Transform to homogeneous clip space.// 转换到齐次剪裁空间
 	vout.PosH = mul(float4(vin.PosL, 1.0f), gWorldViewProj);
 	
 	// Output vertex attributes for interpolation across triangle.
@@ -72,22 +72,25 @@ VertexOut VS(VertexIn vin)
 float4 PS(VertexOut pin, uniform int gLightCount, uniform bool gUseTexure, uniform bool gAlphaClip, uniform bool gFogEnabled) : SV_Target
 {
 	// Interpolating normal can unnormalize it, so normalize it.
+	// 插值后的法线需要重新规范化
     pin.NormalW = normalize(pin.NormalW);
 
 	// The toEye vector is used in lighting.
-	float3 toEye = gEyePosW - pin.PosW; 
+	// toEye矢量用于光照计算
+	float3 toEye = gEyePosW - pin.PosW; //眼睛位置 - 物体的位置（世界坐标）
 	 
 	// Cache the distance to the eye from this surface point.
+	// 保存物体表面顶点离开相机的距离信息
 	float distToEye = length(toEye);
 
-	// Normalize.
+	// Normalize.// 规范化
 	toEye /= distToEye;
 	
-    // Default to multiplicative identity.
+    // Default to multiplicative identity.// 初始化纹理颜色
     float4 texColor = float4(1, 1, 1, 1);
     if(gUseTexure)
 	{
-		// Sample texture.
+		// Sample texture.// 采样纹理
 		texColor = gDiffuseMap.Sample( samAnisotropic, pin.Tex );
 
 		if(gAlphaClip)
@@ -95,12 +98,15 @@ float4 PS(VertexOut pin, uniform int gLightCount, uniform bool gUseTexure, unifo
 			// Discard pixel if texture alpha < 0.1.  Note that we do this
 			// test as soon as possible so that we can potentially exit the shader 
 			// early, thereby skipping the rest of the shader code.
+			// 如果纹理的alpha<0.1，则丢弃像素。
+			// 注意，我们应该尽可能早地进行这个测试，这样我们就可以及早退出
+			// shader，忽略其余shader代码
 			clip(texColor.a - 0.1f);
 		}
 	}
 	 
 	//
-	// Lighting.
+	// Lighting.光照
 	//
 
 	float4 litColor = texColor;
@@ -116,8 +122,7 @@ float4 PS(VertexOut pin, uniform int gLightCount, uniform bool gUseTexure, unifo
 		for(int i = 0; i < gLightCount; ++i)
 		{
 			float4 A, D, S;
-			ComputeDirectionalLight(gMaterial, gDirLights[i], pin.NormalW, toEye, 
-				A, D, S);
+			ComputeDirectionalLight(gMaterial, gDirLights[i], pin.NormalW, toEye, A, D, S);
 
 			ambient += A;
 			diffuse += D;
@@ -129,18 +134,19 @@ float4 PS(VertexOut pin, uniform int gLightCount, uniform bool gUseTexure, unifo
 	}
 
 	//
-	// Fogging
+	// Fogging 雾化
 	//
 
 	if( gFogEnabled )
 	{
 		float fogLerp = saturate( (distToEye - gFogStart) / gFogRange ); 
 
-		// Blend the fog color and the lit color.
+		// Blend the fog color and the lit color.// 混合雾颜色和光照颜色
 		litColor = lerp(litColor, gFogColor, fogLerp);
 	}
 
 	// Common to take alpha from diffuse material and texture.
+	// 从漫反射材质和纹理中提取alpha
 	litColor.a = gMaterial.Diffuse.a * texColor.a;
 
     return litColor;

@@ -179,14 +179,9 @@ bool MirrorApp::Init()
 	InputLayouts::InitAll(md3dDevice);
 	RenderStates::InitAll(md3dDevice);
 
-	HR(D3DX11CreateShaderResourceViewFromFile(md3dDevice, 
-		L"Textures/checkboard.dds", 0, 0, &mFloorDiffuseMapSRV, 0 ));
-
-	HR(D3DX11CreateShaderResourceViewFromFile(md3dDevice, 
-		L"Textures/brick01.dds", 0, 0, &mWallDiffuseMapSRV, 0 ));
-
-	HR(D3DX11CreateShaderResourceViewFromFile(md3dDevice, 
-		L"Textures/ice.dds", 0, 0, &mMirrorDiffuseMapSRV, 0 ));
+	HR(CreateDDSTextureFromFile(md3dDevice,	L"Textures/checkboard.dds", 0, &mFloorDiffuseMapSRV, 0, 0));
+	HR(CreateDDSTextureFromFile(md3dDevice,	L"Textures/brick01.dds", 0, &mWallDiffuseMapSRV, 0, 0));
+	HR(CreateDDSTextureFromFile(md3dDevice,	L"Textures/ice.dds", 0, &mMirrorDiffuseMapSRV, 0, 0));
  
 	BuildRoomGeometryBuffers();
 	BuildSkullGeometryBuffers();

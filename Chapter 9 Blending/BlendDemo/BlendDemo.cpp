@@ -124,23 +124,24 @@ BlendApp::BlendApp(HINSTANCE hInstance)
 	mLastMousePos.x = 0;
 	mLastMousePos.y = 0;
 
+	// 使用单位矩阵初始化
 	XMMATRIX I = XMMatrixIdentity();
 	XMStoreFloat4x4(&mLandWorld, I);
 	XMStoreFloat4x4(&mWavesWorld, I);
 	XMStoreFloat4x4(&mView, I);
 	XMStoreFloat4x4(&mProj, I);
 
-	XMMATRIX boxScale = XMMatrixScaling(15.0f, 15.0f, 15.0f);// 缩放
-	XMMATRIX boxOffset = XMMatrixTranslation(8.0f, 5.0f, -15.0f);//位移
-	XMStoreFloat4x4(&mBoxWorld, boxScale*boxOffset);
+	XMMATRIX boxScale = XMMatrixScaling(15.0f, 15.0f, 15.0f);    // 箱子的缩放矩阵
+	XMMATRIX boxOffset = XMMatrixTranslation(8.0f, 5.0f, -15.0f);// 箱子的位移矩阵
+	XMStoreFloat4x4(&mBoxWorld, boxScale*boxOffset);// mBoxWorld：这个矩阵把箱子的局部坐标转换为世界坐标
 
-	XMMATRIX grassTexScale = XMMatrixScaling(5.0f, 5.0f, 0.0f);
-	XMStoreFloat4x4(&mGrassTexTransform, grassTexScale);
+	XMMATRIX grassTexScale = XMMatrixScaling(5.0f, 5.0f, 0.0f);// 将每个纹理坐标乘以5，使区间扩大为[0,5]，让纹理在墙体上重复5×5次
+	XMStoreFloat4x4(&mGrassTexTransform, grassTexScale);// 草坪纹理的缩放矩阵，把 u，v 坐标进行缩放
 
-	mDirLights[0].Ambient  = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.0f);
-	mDirLights[0].Diffuse  = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	mDirLights[0].Specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	mDirLights[0].Direction = XMFLOAT3(0.57735f, -0.57735f, 0.57735f);
+	mDirLights[0].Ambient  = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.0f);// 由光源发射的环境光的数量
+	mDirLights[0].Diffuse  = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);// 由光源发射的漫反射光的数量
+	mDirLights[0].Specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);// 由光源发射的高光的数量
+	mDirLights[0].Direction = XMFLOAT3(0.57735f, -0.57735f, 0.57735f);// 灯光方向
 
 	mDirLights[1].Ambient  = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 	mDirLights[1].Diffuse  = XMFLOAT4(0.20f, 0.20f, 0.20f, 1.0f);
@@ -364,11 +365,12 @@ void BlendApp::DrawScene()
 		Effects::BasicFX->SetMaterial(mBoxMat);
 		Effects::BasicFX->SetDiffuseMap(mBoxMapSRV);
 
+		// 因为铁丝网纹理包含透明区域，我们可以透过立方体看到背面的三角形，所以我们希望禁用背面消隐功能
 		md3dImmediateContext->RSSetState(RenderStates::NoCullRS);
 		boxTech->GetPassByIndex(p)->Apply(0, md3dImmediateContext);
 		md3dImmediateContext->DrawIndexed(36, 0, 0);
 
-		// Restore default render state.
+		// Restore default render state.// 恢复为默认的渲染状态
 		md3dImmediateContext->RSSetState(0);
 	}
 
